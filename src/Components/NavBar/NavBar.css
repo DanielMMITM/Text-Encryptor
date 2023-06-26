@@ -38,3 +38,9 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.navOptions:link, .navOptions:visited, .navOptions:active {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #fff;
+}

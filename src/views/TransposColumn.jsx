@@ -1,4 +1,4 @@
-export function ColumnTranspos(){
+export function TransposColumn(){
 
     return (
         <>
@@ -9,4 +9,4 @@ export function ColumnTranspos(){
     )
 }
 
-export default ColumnTranspos;
+export default TransposColumn;

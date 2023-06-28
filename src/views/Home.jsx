@@ -3,18 +3,19 @@ import { CardRight } from '../Components/Card/CardRight'
 import { CardLeft } from '../Components/Card/CardLeft'
 import { NavBar } from '../Components/NavBar/NavBar'
 import { Footer } from '../Components/Footer/Footer'
+import '../css/Home.css'
 
 export function Home (){
     return (
         <>
         <NavBar></NavBar>
-        <header>
+        <header className='header'>
             <div className='mainHeader'>
-            <h1 className='mainTitle'>Encripta tu texto con uno de los siguientes algoritmos</h1>
+                <h1 className='mainTitle'>Encripta tu texto con uno de los siguientes algoritmos</h1>
             </div>
             <p className='content'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </header>
-        <body>
+        <body className='body'>
             <section className='CardsSection'>
             <CardRight
                 title="Matriz transpuesta por clave"

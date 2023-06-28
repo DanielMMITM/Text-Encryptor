@@ -1,10 +1,10 @@
 import './Card.css'
-import bannerClave from '../../img/bannerClave.jpg' 
 
-export function CardRight({ title, text, button }) {
+export function CardRight({ img, title, text, button }) {
+    const cardImg = img;
     return (
         <article className="cardContainer">
-            <img className='banner' src={ bannerClave } />
+            <img className='banner' src={ img } />
             <div className='infoContainer'>
                 <h1 className="cardTitle">{ title }</h1>
                 <p className="cardText">{text}</p>

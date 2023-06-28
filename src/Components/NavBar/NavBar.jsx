@@ -10,8 +10,8 @@ export function NavBar() {
             <div className="nav-menu">
                 <ul>
                     <Link className='navOptions' to={"/"}><li>Inicio</li></Link>
-                    <a className='navOptions' href="#Algorithms"><li>Algoritmos</li></a>
-                    <a className='navOptions' href="#ComingSoon"><li>Proximamente</li></a>
+                    <a className='navOptions' href="/#Algorithms"><li>Algoritmos</li></a>
+                    <a className='navOptions' href="/#ComingSoon"><li>Proximamente</li></a>
 
                 </ul>
             </div>

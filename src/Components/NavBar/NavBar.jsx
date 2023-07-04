@@ -5,7 +5,7 @@ export function NavBar() {
     return (
         <div className="nav">
             <div className="nav-logo">
-                <span>Edgar Martínez</span>
+                <span>Encriptador</span>
             </div>
             <div className="nav-menu">
                 <ul>

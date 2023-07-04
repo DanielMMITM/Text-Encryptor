@@ -1,7 +1,6 @@
 import './Card.css'
 
 export function CardRight({ img, title, text, button }) {
-    const cardImg = img;
     return (
         <article className="cardContainer">
             <img className='banner' src={ img } />

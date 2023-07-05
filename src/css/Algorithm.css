@@ -3,3 +3,9 @@
     width: auto;
     height: auto;
 }
+
+.consoleInstructions{
+    margin: -1rem 2rem 2rem;
+    color: #fff;
+    font-size: 1.2rem;
+}

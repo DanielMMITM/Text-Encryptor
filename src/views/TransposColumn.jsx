@@ -75,7 +75,7 @@ export function TransposColumn(){
         }
         if (algoritmo !== "" && rowsNumber !== 0) {
             try {
-                const response = await fetch('http://localhost:8080/columncrypt/' + text + '/' + algoritmo + '/' + rowsNumber);
+                const response = await fetch('http://localhost:8080/crypt/' + text + '/' + algoritmo + '/' + rowsNumber);
                 let data = await response.text();
                 const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
                 return terminalOutputRes;
@@ -98,14 +98,23 @@ export function TransposColumn(){
             <header>
                 <NavBar></NavBar>
             </header>
-            <div>
+            <section>
                 <div className="containerTerminal">
                     <Terminal height="332px" name='Algoritmo de transposicion por columna' onInput={ terminalInput => consumeColumn(terminalInput) }>
                         <TerminalOutput key={"WelcomeText"}>Introduce el texto que deseas encriptar</TerminalOutput>
                         { terminalLineData }
                     </Terminal>
                 </div>
-            </div>
+                <div className="consoleInstructions">
+                    <h3>Instrucciones de uso</h3>
+                    <p>Para utilizar adecuadamente la consola y poder encriptar el texto mediante los algoritmos disponibles, ten en cuenta las siguientes indicaciones. De no seguirlas no sera llevada a cabo la encriptacion de tu texto</p>
+                    <ul className="listInstructions">
+                        <li>Utiliza -t y enseguida coloca el texto que deseas encriptar.</li>
+                        <li>Utiliza -a y enseguida escribe el algoritmo que deseas utilizar (Clave o Columna). Actualmente solo se cuenta con algoritmos de transposicion por columna o transposicion por clave</li>
+                        <li>Utiliza -rn y enseguida indica el numero de filas con el que deseas encriptar tu texto (3, 4 o 5).</li>
+                    </ul>
+                </div>
+            </section>
             <footer>
                 <Footer></Footer>
             </footer>

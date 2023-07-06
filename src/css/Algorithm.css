@@ -1,6 +1,9 @@
+.page-container{
+    width: 100%;
+}
 .containerTerminal{
     padding: 2rem;
-    width: auto;
+    width: 191vh;
     height: auto;
 }
 

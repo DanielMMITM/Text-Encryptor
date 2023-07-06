@@ -9,13 +9,12 @@ export function TransposColumn(){
     const [terminalLineData, setTerminalLineData] = useState();
 
     const consumeColumn = async (terminalInput) => {
-        let text = "", algoritmo = "", rowsNumber = 0, textBoolean, algoritmoBoolean, rowsNumberBoolean;
+        let text = "", algoritmo = "", key = "",  rowsNumber = 0, textBoolean, algoritmoBoolean, rowsNumberBoolean, keyBoolean;
         let myArray = terminalInput.split(" ");
+       
         for (let i = 0; i < myArray.length; i++) {
             if (myArray[i].startsWith("-")) {
-                textBoolean = false;
-                algoritmoBoolean = false;
-                rowsNumberBoolean = false;
+                algoritmoBoolean = textBoolean = rowsNumberBoolean  = keyBoolean = false;
                 switch (myArray[i]) {
                     case "-t":
                         textBoolean = true;
@@ -26,16 +25,20 @@ export function TransposColumn(){
                     case "-rn":
                         rowsNumberBoolean = true;
                         break;
+                    case "-k":
+                        keyBoolean = true;
+                        break;
+
                     default:
                         console.log("Error en default")
                         const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Introduce una bandera existente")}</TerminalOutput>
                         return terminalOutputRes;
                 }
             }
-            else if (textBoolean === true) {
+            else if (textBoolean) {
                 text = text + " " + myArray[i];
             }
-            else if (algoritmoBoolean === true) {
+            else if (algoritmoBoolean) {
                 if (myArray[i] === "Columna" || myArray[i] === "Clave") {
                     if (myArray[i + 1].startsWith("-")) {
                         algoritmo = myArray[i]
@@ -54,7 +57,7 @@ export function TransposColumn(){
                     
                 }
             }
-            else if (rowsNumberBoolean === true) {
+            else if (rowsNumberBoolean) {
                 if (parseInt(myArray[i]) === 3 || parseInt(myArray[i]) === 4 || parseInt(myArray[i]) === 5) {
                     rowsNumber = parseInt(myArray[i]);
                 }
@@ -65,6 +68,9 @@ export function TransposColumn(){
                     return terminalOutputRes;
                 }
             }
+            else if (keyBoolean) {
+                key = key + " " + myArray[i];
+            }
             else {
                 console.log("Error incompleto")
 
@@ -74,17 +80,32 @@ export function TransposColumn(){
             }
         }
         if (algoritmo !== "" && rowsNumber !== 0) {
-            try {
-                const response = await fetch('http://localhost:8080/crypt/' + text + '/' + algoritmo + '/' + rowsNumber);
-                let data = await response.text();
-                const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
-                return terminalOutputRes;
+            if (algoritmo === "Columna") {
+                try {
+                    const response = await fetch('http://localhost:8080/crypt/' + text + '/' + rowsNumber);
+                    let data = await response.text();
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
+                    return terminalOutputRes;
+                }
+                catch (err) {
+                    console.log(err);
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
+                    return terminalOutputRes;
+                }         
             }
-            catch (err) {
-                console.log(err);
-                const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
-                return terminalOutputRes;
-            }       
+            else if (algoritmo === "Clave") {
+                try {
+                    const response = await fetch('http://localhost:8080/crypt?text=' + text + "&?key=" + key);
+                    let data = await response.text();
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
+                    return terminalOutputRes;
+                }
+                catch (err) {
+                    console.log(err);
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
+                    return terminalOutputRes;
+                } 
+            }
         }
         else {
             const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Error. Asegurate de escribir la instruccion como se indica")}</TerminalOutput>

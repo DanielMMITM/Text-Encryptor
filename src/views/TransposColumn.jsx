@@ -8,10 +8,10 @@ export function TransposColumn(){
 
     const [terminalLineData, setTerminalLineData] = useState();
 
+
     const consumeColumn = async (terminalInput) => {
         let text = "", algoritmo = "", key = "",  rowsNumber = 0, textBoolean, algoritmoBoolean, rowsNumberBoolean, keyBoolean;
         let myArray = terminalInput.split(" ");
-       
         for (let i = 0; i < myArray.length; i++) {
             if (myArray[i].startsWith("-")) {
                 algoritmoBoolean = textBoolean = rowsNumberBoolean  = keyBoolean = false;
@@ -79,7 +79,7 @@ export function TransposColumn(){
                 
             }
         }
-        if (algoritmo !== "" && rowsNumber !== 0) {
+        if (algoritmo !== "" && (rowsNumber !== 0 || key !== "")) {
             if (algoritmo === "Columna") {
                 try {
                     const response = await fetch('http://localhost:8080/crypt/' + text + '/' + rowsNumber);
@@ -95,7 +95,7 @@ export function TransposColumn(){
             }
             else if (algoritmo === "Clave") {
                 try {
-                    const response = await fetch('http://localhost:8080/crypt?text=' + text + "&?key=" + key);
+                    const response = await fetch('http://localhost:8080/crypt?text=' + text + "&key=" + key);
                     let data = await response.text();
                     const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
                     return terminalOutputRes;

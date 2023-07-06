@@ -8,6 +8,7 @@ import claveImg from '../img/claveImg.png'
 import columnImg from '../img/columnImg.png'
 import comingSoonImg from '../img/comingSoonImg.jpg'
 
+
 export function Home (){
     return (
         <>

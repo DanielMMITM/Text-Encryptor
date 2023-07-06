@@ -3,6 +3,7 @@ import { Footer } from "../Components/Footer/Footer";
 import { NavBar } from "../Components/NavBar/NavBar";
 import { useState } from "react";
 import '../css/Algorithm.css'
+import { ScrollRestoration } from "react-router-dom";
 
 export function Encrypt(){
 
@@ -116,6 +117,7 @@ export function Encrypt(){
 
     return (
         <>
+            <ScrollRestoration/>
             <header>
                 <NavBar></NavBar>
             </header>

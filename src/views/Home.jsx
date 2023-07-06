@@ -24,13 +24,13 @@ export function Home (){
                         img={ claveImg }
                         title="Matriz transpuesta por clave"
                         text="En él, el mensaje original estará limitado a un rectángulo, de izquierda a derecha y de arriba hacia abajo. Después, se escoge una clave para asignar un número a cada columna del rectángulo para determinar el orden. El número correspondiente a la letra de la clave estará determinado por orden alfabético. Por ejemplo, si la palabra clave es CAT y el mensaje es THE SKY IS BLUE el proceso sería el siguiente:"
-                        button={ <Button text="Probar" route="/TransposClave"></Button> }>    
+                        button={ <Button text="Probar" route="/Encrypt"></Button> }>    
                     </CardRight>
                     <CardLeft
                         img={ columnImg }
                         title="Matriz transpuesta por columna"
                         text="En él, el mensaje original estará limitado a un rectángulo, de izquierda a derecha y de arriba hacia abajo. Después, se escoge una clave para asignar un número a cada columna del rectángulo para determinar el orden. El número correspondiente a la letra de la clave estará determinado por orden alfabético. Por ejemplo, si la palabra clave es CAT y el mensaje es THE SKY IS BLUE el proceso sería el siguiente:"
-                        button={ <Button text="Probar" route="/TransposColumn"></Button> }>    
+                        button={ <Button text="Probar" route="/Encrypt"></Button> }>    
                     </CardLeft>
                     <div id='ComingSoon'>
                         <CardRight

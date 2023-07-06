@@ -4,7 +4,7 @@ import { NavBar } from "../Components/NavBar/NavBar";
 import { useState } from "react";
 import '../css/Algorithm.css'
 
-export function TransposColumn(){
+export function Encrypt(){
 
     const [terminalLineData, setTerminalLineData] = useState();
 
@@ -121,8 +121,8 @@ export function TransposColumn(){
             </header>
             <section>
                 <div className="containerTerminal">
-                    <Terminal height="332px" name='Algoritmo de transposicion por columna' onInput={ terminalInput => consumeColumn(terminalInput) }>
-                        <TerminalOutput key={"WelcomeText"}>Introduce el texto que deseas encriptar</TerminalOutput>
+                    <Terminal height="332px" name='Encripta tu texto' onInput={ terminalInput => consumeColumn(terminalInput) }>
+                        <TerminalOutput key={"WelcomeText"}>Introduce una sentencia de encriptacion</TerminalOutput>
                         { terminalLineData }
                     </Terminal>
                 </div>
@@ -133,6 +133,7 @@ export function TransposColumn(){
                         <li>Utiliza -t y enseguida coloca el texto que deseas encriptar.</li>
                         <li>Utiliza -a y enseguida escribe el algoritmo que deseas utilizar (Clave o Columna). Actualmente solo se cuenta con algoritmos de transposicion por columna o transposicion por clave</li>
                         <li>Utiliza -rn y enseguida indica el numero de filas con el que deseas encriptar tu texto (3, 4 o 5).</li>
+                        <li>Utiliza -k y enseguida introduce la clave con la que deseas encriptar tu texto.</li>
                     </ul>
                 </div>
             </section>
@@ -143,4 +144,4 @@ export function TransposColumn(){
     )
 }
 
-export default TransposColumn;
+export default Encrypt;

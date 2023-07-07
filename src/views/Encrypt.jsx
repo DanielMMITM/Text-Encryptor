@@ -11,11 +11,11 @@ export function Encrypt(){
 
 
     const consumeColumn = async (terminalInput) => {
-        let text = "", algoritmo = "", key = "",  rowsNumber = 0, textBoolean, algoritmoBoolean, rowsNumberBoolean, keyBoolean;
+        let text = "", algoritmo = "", key = "", rowsNumber = 0, columnsNumber = 0, textBoolean, algoritmoBoolean, rowsNumberBoolean, keyBoolean, decrypt, columnsNumberBoolean;
         let myArray = terminalInput.split(" ");
         for (let i = 0; i < myArray.length; i++) {
             if (myArray[i].startsWith("-")) {
-                algoritmoBoolean = textBoolean = rowsNumberBoolean  = keyBoolean = false;
+                algoritmoBoolean = textBoolean = rowsNumberBoolean  = keyBoolean = columnsNumberBoolean = false;
                 switch (myArray[i]) {
                     case "-t":
                         textBoolean = true;
@@ -29,7 +29,12 @@ export function Encrypt(){
                     case "-k":
                         keyBoolean = true;
                         break;
-
+                    case "-d":
+                        decrypt = true;
+                        break;
+                    case "-cn":
+                        columnsNumberBoolean = true;
+                        break;
                     default:
                         console.log("Error en default")
                         const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Introduce una bandera existente")}</TerminalOutput>
@@ -69,6 +74,10 @@ export function Encrypt(){
                     return terminalOutputRes;
                 }
             }
+            else if (columnsNumberBoolean) {
+                columnsNumber = parseInt(myArray[i]);
+
+            }
             else if (keyBoolean) {
                 key = key + " " + myArray[i];
             }
@@ -81,7 +90,7 @@ export function Encrypt(){
             }
         }
         if (algoritmo !== "" && (rowsNumber !== 0 || key !== "")) {
-            if (algoritmo === "Columna") {
+            if (algoritmo === "Columna" && !decrypt) {
                 try {
                     const response = await fetch('http://localhost:8080/crypt/' + text + '/' + rowsNumber);
                     let data = await response.text();
@@ -94,7 +103,10 @@ export function Encrypt(){
                     return terminalOutputRes;
                 }         
             }
-            else if (algoritmo === "Clave") {
+            else if (algoritmo === "Columna" && decrypt) {
+                
+            }
+            else if (algoritmo === "Clave" && !decrypt) {
                 try {
                     const response = await fetch('http://localhost:8080/crypt?text=' + text + "&key=" + key);
                     let data = await response.text();
@@ -106,6 +118,9 @@ export function Encrypt(){
                     const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
                     return terminalOutputRes;
                 } 
+            }
+            else if(algoritmo === "Clave" && decrypt) {
+                
             }
         }
         else {

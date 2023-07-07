@@ -89,7 +89,7 @@ export function Encrypt(){
                 
             }
         }
-        if (algoritmo !== "" && (rowsNumber !== 0 || key !== "")) {
+        if (algoritmo !== "" && (rowsNumber !== 0 || key !== "" || columnsNumber !== 0)) {
             if (algoritmo === "Columna" && !decrypt) {
                 try {
                     const response = await fetch('http://localhost:8080/crypt/' + text + '/' + rowsNumber);
@@ -104,7 +104,17 @@ export function Encrypt(){
                 }         
             }
             else if (algoritmo === "Columna" && decrypt) {
-                
+                try {
+                    const response = await fetch('http://localhost:8080/decrypt/' + text + '/' + columnsNumber);
+                    let data = await response.text();
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
+                    return terminalOutputRes;
+                }
+                catch (err) {
+                    console.log(err);
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
+                    return terminalOutputRes;
+                }         
             }
             else if (algoritmo === "Clave" && !decrypt) {
                 try {
@@ -120,7 +130,17 @@ export function Encrypt(){
                 } 
             }
             else if(algoritmo === "Clave" && decrypt) {
-                
+                try {
+                    const response = await fetch('http://localhost:8080/decrypt?text=' + text + "&key=" + key);
+                    let data = await response.text();
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData(data)}</TerminalOutput>
+                    return terminalOutputRes;
+                }
+                catch (err) {
+                    console.log(err);
+                    const terminalOutputRes = <TerminalOutput>{setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}</TerminalOutput>
+                    return terminalOutputRes;
+                } 
             }
         }
         else {
@@ -151,6 +171,8 @@ export function Encrypt(){
                         <li>Utiliza -a y enseguida escribe el algoritmo que deseas utilizar (Clave o Columna). Actualmente solo se cuenta con algoritmos de transposicion por columna o transposicion por clave</li>
                         <li>Utiliza -rn y enseguida indica el numero de filas con el que deseas encriptar tu texto (3, 4 o 5).</li>
                         <li>Utiliza -k y enseguida introduce la clave con la que deseas encriptar tu texto.</li>
+                        <li>Para descifrar por columna reescribe la sentencia pero asegurate de cambiar la bandera "-rn" por "-cn" e introduce el numero de columnas que se te dio al cifrar el texto y añade "-d" al final de la sentencia.</li>
+                        <li>Para descifrar por clave reescribe la misma sentencia pero añade "-d" al final de la sentencia.</li>
                     </ul>
                 </div>
             </section>

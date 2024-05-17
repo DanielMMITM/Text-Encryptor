@@ -10,12 +10,12 @@ export function Encrypt() {
 
   const consumeColumn = async (terminalInput) => {
     let text = "",
-      algoritmo = "",
+      algorithm = "",
       key = "",
       rowsNumber = 0,
       columnsNumber = 0,
       textBoolean,
-      algoritmoBoolean,
+      algorithmBoolean,
       rowsNumberBoolean,
       keyBoolean,
       decrypt,
@@ -23,7 +23,7 @@ export function Encrypt() {
     let myArray = terminalInput.split(" ");
     for (let i = 0; i < myArray.length; i++) {
       if (myArray[i].startsWith("-")) {
-        algoritmoBoolean =
+        algorithmBoolean =
           textBoolean =
           rowsNumberBoolean =
           keyBoolean =
@@ -34,7 +34,7 @@ export function Encrypt() {
             textBoolean = true;
             break;
           case "-a":
-            algoritmoBoolean = true;
+            algorithmBoolean = true;
             break;
           case "-rn":
             rowsNumberBoolean = true;
@@ -51,21 +51,21 @@ export function Encrypt() {
           default:
             const terminalOutputRes = (
               <TerminalOutput>
-                {setTerminalLineData("Introduce una bandera existente")}
+                {setTerminalLineData("Enter an existent flag")}
               </TerminalOutput>
             );
             return terminalOutputRes;
         }
       } else if (textBoolean) {
         text = text + " " + myArray[i];
-      } else if (algoritmoBoolean) {
+      } else if (algorithmBoolean) {
         if (myArray[i] === "Columna" || myArray[i] === "Clave") {
           if (myArray[i + 1].startsWith("-")) {
-            algoritmo = myArray[i];
+            algorithm = myArray[i];
           } else {
             const terminalOutputRes = (
               <TerminalOutput>
-                {setTerminalLineData("Introdujiste parametros de más")}
+                {setTerminalLineData("Flags can only contain one parameter")}
               </TerminalOutput>
             );
             return terminalOutputRes;
@@ -73,7 +73,7 @@ export function Encrypt() {
         } else {
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Ese algoritmo no existe")}
+              {setTerminalLineData("Non existent algorithm")}
             </TerminalOutput>
           );
           return terminalOutputRes;
@@ -88,7 +88,7 @@ export function Encrypt() {
         } else {
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Solo se permite de 3 a 5 filas")}
+              {setTerminalLineData("Allowed rows goes from 3 to 5")}
             </TerminalOutput>
           );
           return terminalOutputRes;
@@ -101,7 +101,7 @@ export function Encrypt() {
         const terminalOutputRes = (
           <TerminalOutput>
             {setTerminalLineData(
-              "Error. Asegurate de escribir la instruccion como se indica"
+              "Error. Make sure to write the sentence correctly"
             )}
           </TerminalOutput>
         );
@@ -109,10 +109,10 @@ export function Encrypt() {
       }
     }
     if (
-      algoritmo !== "" &&
+      algorithm !== "" &&
       (rowsNumber !== 0 || key !== "" || columnsNumber !== 0)
     ) {
-      if (algoritmo === "Columna" && !decrypt) {
+      if (algorithm === "Columna" && !decrypt) {
         try {
           const response = await fetch(
             "http://localhost:8080/crypt/" + text + "/" + rowsNumber
@@ -126,12 +126,12 @@ export function Encrypt() {
           console.log(err);
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}
+              {setTerminalLineData("An error has occurred. Try again")}
             </TerminalOutput>
           );
           return terminalOutputRes;
         }
-      } else if (algoritmo === "Columna" && decrypt) {
+      } else if (algorithm === "Columna" && decrypt) {
         try {
           const response = await fetch(
             "http://localhost:8080/decrypt/" + text + "/" + columnsNumber
@@ -145,12 +145,12 @@ export function Encrypt() {
           console.log(err);
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}
+              {setTerminalLineData("An error has occurred. Try again")}
             </TerminalOutput>
           );
           return terminalOutputRes;
         }
-      } else if (algoritmo === "Clave" && !decrypt) {
+      } else if (algorithm === "Clave" && !decrypt) {
         try {
           const response = await fetch(
             "http://localhost:8080/crypt?text=" + text + "&key=" + key
@@ -164,12 +164,12 @@ export function Encrypt() {
           console.log(err);
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}
+              {setTerminalLineData("An error has occurred. Try again")}
             </TerminalOutput>
           );
           return terminalOutputRes;
         }
-      } else if (algoritmo === "Clave" && decrypt) {
+      } else if (algorithm === "Clave" && decrypt) {
         try {
           const response = await fetch(
             "http://localhost:8080/decrypt?text=" + text + "&key=" + key
@@ -183,7 +183,7 @@ export function Encrypt() {
           console.log(err);
           const terminalOutputRes = (
             <TerminalOutput>
-              {setTerminalLineData("Ocurrio un error, vuelve a intentarlo")}
+              {setTerminalLineData("An error has occurred. Try again")}
             </TerminalOutput>
           );
           return terminalOutputRes;
@@ -193,7 +193,7 @@ export function Encrypt() {
       const terminalOutputRes = (
         <TerminalOutput>
           {setTerminalLineData(
-            "Error. Asegurate de escribir la instruccion como se indica"
+            "Error. Make sure to write the sentence correctly"
           )}
         </TerminalOutput>
       );
@@ -211,49 +211,46 @@ export function Encrypt() {
         <div className="containerTerminal">
           <Terminal
             height="332px"
-            name="Encripta tu texto"
+            name="Encrypt / Decrypt your text"
             onInput={(terminalInput) => consumeColumn(terminalInput)}
           >
             <TerminalOutput key={"WelcomeText"}>
-              Introduce una sentencia de encriptacion
+              Write a sentence to encrypt
             </TerminalOutput>
             {terminalLineData}
           </Terminal>
         </div>
         <div className="consoleInstructions">
-          <h3>Instrucciones de uso</h3>
+          <h3>Instructions</h3>
           <p>
-            Para utilizar adecuadamente la consola y poder encriptar el texto
-            mediante los algoritmos disponibles, ten en cuenta las siguientes
-            indicaciones. De no seguirlas no sera llevada a cabo la encriptacion
-            de tu texto
+            To use properly our console and encrypt the text with the available
+            algorithms, read the following instructions:
           </p>
           <ul className="listInstructions">
+            <li>Use -t followed by the text to encrypt.</li>
+            <li>Use -a followed by the algorithm to use (Clave / Columna).</li>
             <li>
-              Utiliza -t y enseguida coloca el texto que deseas encriptar.
+              Use -rn followed by the number of rows to encrypt your text (3 / 4
+              / 5).
             </li>
+            <li>Use -k followed by the secret key to encrypt your text.</li>
+          </ul>
+          <h4>Decrypt using key transposed matrix</h4>
+          <ul className="listInstructions">
             <li>
-              Utiliza -a y enseguida escribe el algoritmo que deseas utilizar
-              (Clave o Columna). Actualmente solo se cuenta con algoritmos de
-              transposicion por columna o transposicion por clave
+              To decrypt a text, write all the previous flags replacing the text
+              with the given encrypted text and add -d at the end
             </li>
+          </ul>
+          <h4>Decrypt using column transposed matrix</h4>
+          <ul className="listInstructions">
             <li>
-              Utiliza -rn y enseguida indica el numero de filas con el que
-              deseas encriptar tu texto (3, 4 o 5).
+              Replace -rn with -cn followed by the number of columns given.
             </li>
+            <li>Replace the text with the given encrypted text.</li>
             <li>
-              Utiliza -k y enseguida introduce la clave con la que deseas
-              encriptar tu texto.
-            </li>
-            <li>
-              Para descifrar por columna reescribe la sentencia pero asegurate
-              de cambiar la bandera "-rn" por "-cn" e introduce el numero de
-              columnas que se te dio al cifrar el texto y añade "-d" al final de
-              la sentencia.
-            </li>
-            <li>
-              Para descifrar por clave reescribe la misma sentencia pero añade
-              "-d" al final de la sentencia.
+              Write all the previous flags and add -d at the end of the
+              sentence.
             </li>
           </ul>
         </div>

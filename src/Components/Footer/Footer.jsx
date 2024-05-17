@@ -1,9 +1,9 @@
-import './Footer.css'
+import "./Footer.css";
 
 export function Footer() {
-    return (
-        <div className="footer">
-            <p className='footerText'>Encriptador de Texto</p>
-        </div>
-    )
+  return (
+    <div className="footer">
+      <p className="footerText">Text Encryptor</p>
+    </div>
+  );
 }

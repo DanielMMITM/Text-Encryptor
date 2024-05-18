@@ -6,7 +6,7 @@ We bring to the user an interactive console component so it gives a real console
 
 ### ⚠️ Warning ⚠️
 **Here are some considerations that I just found aren't working correctly**
-Avoid the usage of keys with repeated vowels like: *secret*, *banana*, *robot*, etc.
+* Avoid the usage of keys with repeated vowels like: *secret*, *banana*, *robot*, etc.
 
 ## Key Transposed Matrix
 

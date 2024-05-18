@@ -1,14 +1,14 @@
-.page-container{
-    width: 100%;
+.page-container {
+  width: 100%;
 }
-.containerTerminal{
-    padding: 2rem;
-    width: 191vh;
-    height: auto;
+.containerTerminal {
+  padding: 2rem;
+  max-width: 191vh;
+  height: auto;
 }
 
-.consoleInstructions{
-    margin: -1rem 2rem 2rem;
-    color: #fff;
-    font-size: 1.2rem;
+.consoleInstructions {
+  margin: -1rem 2rem 2rem;
+  color: #fff;
+  font-size: 1.2rem;
 }

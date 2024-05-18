@@ -39,4 +39,6 @@ Here is the usage of the algorithm:
 ---
 
 ## Preview
-![Home page](https://github.com/DanielMMITM/Text-Encryptor/previews/home.gif)
+### Home
+![home-page](https://github.com/DanielMMITM/Text-Encryptor/assets/86424705/d134124b-68d3-4926-b01a-905a35068a3c)
+

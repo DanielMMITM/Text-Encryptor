@@ -5,7 +5,7 @@ The idea of this project is to encrypt and decrypt your text. There are only 2 e
 We bring to the user an interactive console component so it gives a real console experience. The user must follow some rules (flags) to encrypt and decrypt a text, otherwise it won´t work.
 
 ### ⚠️ Warning ⚠️
-** Here are some considerations that I just found aren't working correctly **
+**Here are some considerations that I just found aren't working correctly**
 Avoid the usage of keys with repeated vowels like: *secret*, *banana*, *robot*, etc.
 
 ## Key Transposed Matrix

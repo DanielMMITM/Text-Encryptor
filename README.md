@@ -39,3 +39,4 @@ Here is the usage of the algorithm:
 ---
 
 ## Preview
+![Home page](https://github.com/DanielMMITM/Text-Encryptor/previews/home.gif)
